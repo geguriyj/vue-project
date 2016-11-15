@@ -1,30 +1,31 @@
 <style src="todomvc-app-css/index.css"></style>
 <style>
-
+      
+.new-todo {
+  padding: 16px;
+}
 .todo-list li img {
-  display: none;
-  margin-left: 50px;
-  margin-buttom: 50px;
-  width: 250px;
+    margin-left: 50px;
+    margin-buttom: 50px;
+    width: 250px;
 }
 .todo-list li img.show {
-  display: block;
+    display: block;
 }
-
-.add-todo .fileUpload {
+.todo-list li .fileUpload {
     color: #fff;
     background-color: #5cb85c;
     border-color: #4cae4c;
     position: absolute;
     overflow: hidden;
-    top: 20px;
-	  right: 10px;
-	  height: 20px;
+    top: 15px;
+    right: 50px;
+    height: 20px;
     padding: 5px;
     font-size: 13px;
     border-radius: 4px;
 }
-.add-todo .fileUpload input.upload {
+.todo-list li .fileUpload input.upload {
     position: absolute;
     top: 0;
     right: 0;
@@ -36,30 +37,40 @@
     filter: alpha(opacity=0);
 }
 
+.todo-list li .edit {
+  width: 80%;
+  border: 0;
+  box-shadow: inset 0 -1px 1px 0 rgba(0, 0, 0, 0.1);
+}
+.todo-list li .remove {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  margin: auto 0;
+  font-size: 30px;
+  color: #cc9a9a;
+  margin-bottom: 11px;
+  transition: color 0.2s ease-out;
+}
+
 </style>
 <template>
   <section class="todoapp">
     <!-- header -->
-    <header class="header add-todo">
-      <h1>todos</h1>
+    <header class="header">
+      <h1>설문</h1>
       <input class="new-todo"
         autofocus
         autocomplete="off"
         placeholder="What needs to be done?"
         @keyup.enter="addTodo">
 
-      <div class="fileUpload">
-        <span>Upload</span>
-        <input type="file" class="upload" @change="addImage"/>
-      </div>
-
     </header>
     <!-- main section -->
     <section class="main" v-show="todos.length">
-      <input class="toggle-all"
-        type="checkbox"
-        :checked="allChecked"
-        @change="toggleAll({ done: !allChecked })">
       <ul class="todo-list">
         <todo v-for="todo in filteredTodos" :todo="todo"></todo>
       </ul>
@@ -90,6 +101,14 @@
 import { mapMutations } from 'vuex'
 import Todo from './Todo.vue'
 
+import Vue from 'vue'
+import Mint from 'mint-ui'
+import 'mint-ui/lib/style.css';
+Vue.use(Mint);
+
+//import Toast from 'vue-toast-mobile';
+//import 'mint-ui/lib/style.css';
+
 const filters = {
   all: todos => todos,
   active: todos => todos.filter(todo => !todo.done),
@@ -105,7 +124,11 @@ export default {
     }
   },
   created () {
+    Mint.Indicator.open()
     this.$store.commit('getTodo')
+    setTimeout(h => {
+        Mint.Indicator.close()
+    }, 500)
   },
   computed: {
     todos () {
@@ -129,46 +152,7 @@ export default {
       }
       e.target.value = ''
     },
-    disp (src) {
-        var text = 'aaa';
-        this.$store.commit('displayImage', { text, src })
-    },
-    addImage (e) {
-
-        //Get count of selected files
-         var input = e.target
-         var countFiles = input.files.length
-         var imgPath = input.value
-         var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase()
-         var _this = this
-         function dispImg (src) {
-            _this.disp(src)
-         }
-         if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
-             if (typeof (FileReader) != "undefined") {
-                 //loop for each file selected for uploaded.
-                 for (var i = 0; i < countFiles; i++) {
-                     var reader = new FileReader()
-                     reader.onload = function (e) {
-                        var src = e.target.result
-                        dispImg(src)
-                     /*
-                         $("<img />", {
-                             "src": e.target.result,
-                                 "class": "thumb-image"
-                         }).appendTo(image_holder);
-                         */
-                     }
-                     //image_holder.show();
-                     reader.readAsDataURL(input.files[i])
-                 }
-             } else {
-                 alert("This browser does not support FileReader.")
-             }
-         } else {
-             alert("Pls select only images")
-         }
-    },
+    
     ...mapMutations([
       'toggleAll',
       'clearCompleted'

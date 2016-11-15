@@ -8,12 +8,21 @@
 <script>
 import Hello from './components/Hello'
 
+import Vue from 'vue'
+import Mint from 'mint-ui';
+import 'mint-ui/lib/style.css';
+Vue.use(Mint);
+
 export default {
   name: 'app',
   components: {
     Hello
   }
 }
+
+import Toast from 'mint-ui/lib/toast';
+Toast('Upload Complete');
+
 </script>
 
 <style>

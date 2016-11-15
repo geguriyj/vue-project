@@ -1,14 +1,7 @@
 <template>
-  <li class="todo" :class="{ completed: todo.done, editing: editing }">
-    <div class="view">
-      <input class="toggle"
-        type="checkbox"
-        :checked="todo.done"
-        @change="toggleTodo({ todo: todo })">
-      <label v-text="todo.text" @dblclick="editing = true"></label>
-      <img :class="todo.src ? 'show' : ''" :src="todo.src"/>
-      <button class="destroy" @click="deleteTodo({ todo: todo })"></button>
-    </div>
+  <li class="todo" :class="{ editing: editing }">
+    <input class="toggle" type="checkbox" @change="toggleTodo({ todo: todo })">
+    <label v-show="!editing" v-text="todo.text" @dblclick="editing = true"></label>
     <input class="edit"
       v-show="editing"
       v-focus="editing"
@@ -16,6 +9,12 @@
       @keyup.enter="doneEdit"
       @keyup.esc="cancelEdit"
       @blur="doneEdit">
+    <img v-show="todo.src" :src="todo.src"/>
+    <div class="fileUpload">
+      <span>Upload</span>
+      <input type="file" class="upload" @change="addImage({ todo: todo})"/>
+    </div>
+    <button class="remove" @click="deleteTodo({ todo: todo })">X</button>
   </li>
 </template>
 
@@ -27,7 +26,7 @@ export default {
   props: ['todo'],
   data () {
     return {
-      editing: false
+      editing: true
     }
   },
   directives: {
@@ -57,12 +56,51 @@ export default {
           todo,
           value
         })
-        this.editing = false
+        //this.editing = false
       }
     },
     cancelEdit (e) {
       e.target.value = this.todo.text
       this.editing = false
+    },
+    disp (src) {
+        var text = 'aaa';
+        this.$store.commit('displayImage', { text, src })
+    },
+    addImage (e) {
+        //Get count of selected files
+         var input = e.target
+         var countFiles = input.files.length
+         var imgPath = input.value
+         var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase()
+         var _this = this
+         function dispImg (src) {
+            _this.disp(src)
+         }
+         if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+             if (typeof (FileReader) != "undefined") {
+                 //loop for each file selected for uploaded.
+                 for (var i = 0; i < countFiles; i++) {
+                     var reader = new FileReader()
+                     reader.onload = function (e) {
+                        var src = e.target.result
+                        dispImg(src)
+                     /*
+                         $("<img />", {
+                             "src": e.target.result,
+                                 "class": "thumb-image"
+                         }).appendTo(image_holder);
+                         */
+                     }
+                     //image_holder.show();
+                     reader.readAsDataURL(input.files[i])
+                 }
+             } else {
+                 alert("This browser does not support FileReader.")
+             }
+         } else {
+             alert("Pls select only images")
+         }
     }
   }
 }
