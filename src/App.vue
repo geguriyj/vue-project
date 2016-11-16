@@ -1,37 +1,155 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
-  </div>
+  <section class="todoapp">
+    <!-- header -->
+    <header class="header">
+      <h1>설문</h1>
+      <input class="new-todo"
+             autofocus
+             autocomplete="off"
+             placeholder="설문 상세 내용을 입력하세요.">
+    </header>
+    <!-- main section -->
+    <section class="main">
+      <checklist></checklist>
+    </section>
+    <section class="main">
+      <radiolist></radiolist>
+    </section>
+    <section class="main">
+      <singletext></singletext>
+    </section>
+    <section class="main">
+      <multitext></multitext>
+    </section>
+    <section class="main">
+      <picker></picker>
+    </section>
+    <!-- footer -->
+    <footer class="footer">
+      <ul class="filters">
+        <li>
+          <a :href="'#/'">UP</a>
+          <a :href="'#/'">DOWN</a>
+        </li>
+      </ul>
+      <button class="delete">
+        DELETE
+      </button>
+    </footer>
+  </section>
 </template>
 
 <script>
-import Hello from './components/Hello'
 
 import Vue from 'vue'
-import Mint from 'mint-ui';
-import 'mint-ui/lib/style.css';
-Vue.use(Mint);
+
+import checklist from './components/CheckList.vue'
+import radiolist from './components/RadioList.vue'
+import singletext from './components/SingleText.vue'
+import multitext from './components/MultiText.vue'
+import picker from './components/DatePicker.vue'
 
 export default {
   name: 'app',
-  components: {
-    Hello
+  components: { 
+    checklist, radiolist, singletext, multitext, picker
+  },
+  methods: {
+    clearCompleted() {
+
+    },
+    MoveUp() {
+
+    },
+    MoveDown() {
+      
+    }
   }
 }
 
-import Toast from 'mint-ui/lib/toast';
-Toast('Upload Complete');
+
+// // 하단에서 열리는 메뉴팝업
+// import Popup from './components/Popup.vue'
+// new Vue({
+//   el: '#bottomPop',
+//   render: h => h(Popup)
+// })
+
 
 </script>
 
+<style src="todomvc-app-css/index.css"></style>
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
+  .main {
+    margin-bottom: 50px;
+    border: 2px solid #C4DDDF;
+  }
+  .new-todo {
+    padding: 16px;
+  }
+  .todo-list li img {
+    margin-left: 50px;
+    margin-buttom: 50px;
+    width: 250px;
+  }
+  .todo-list li img.show {
+    display: block;
+  }
+  .todo-list li .fileUpload {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    position: absolute;
+    overflow: hidden;
+    top: 15px;
+    right: 50px;
+    height: 20px;
+    padding: 5px;
+    font-size: 13px;
+    border-radius: 4px;
+  }
+  .todo-list li .fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
+
+  .todo-list li .edit {
+    width: 80%;
+    border: 0;
+    box-shadow: inset 0 -1px 1px 0 rgba(0, 0, 0, 0.1);
+  }
+  .todo-list li .remove {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    margin: auto 0;
+    font-size: 30px;
+    color: #cc9a9a;
+    margin-bottom: 11px;
+    transition: color 0.2s ease-out;
+  }
+  .filters li a {
+    border-color: rgba(175, 47, 47, 0.1);
+  }
+  .footer button {
+    color: inherit;
+    padding: 3px 7px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+
+    float: right;
+    line-height: 20px;
+    cursor: pointer;
+    border-color: rgba(175, 47, 47, 0.1);
+  }
 </style>

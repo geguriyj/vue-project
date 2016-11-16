@@ -1,8 +1,13 @@
-
 <template>
-  <ul class="todo-list">
-    <item v-for="todo in filteredTodos" :todo="todo"></item>
-  </ul>
+  <div>
+    <input class="new-todo"
+               autofocus
+               autocomplete="off"
+               placeholder="질문을 입력하세요.">
+    <ul class="todo-list">
+      <radio v-for="todo in filteredTodos" :todo="todo"></radio>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -18,7 +23,7 @@
   import { mapMutations } from 'vuex'
 
   import store from '../store'
-  import item from './Item.vue'
+  import radio from './RadioBox.vue'
   
   // Vue.component('item', Item)
 
@@ -27,8 +32,8 @@
   import 'mint-ui/lib/style.css'
 
   export default {
-    name: 'itembox',
-    components: { item },
+    name: 'radiolist',
+    components: { radio },
     store,
     data () {
       return {
