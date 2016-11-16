@@ -6,45 +6,35 @@ export const state = {
 
 export const mutations = {
 
-  // setTodo (state, { id, text, src }) {
-  //   state.todos.push({
-  //     id,
-  //     text,
-  //     src,
-  //     done: false
-  //   })
-  // },
   setImage (state, { todo, value, evt }) {
     //Get count of selected files
     var input = evt.target
-    var files = [...input.files]
+    // var files = [...input.files]
     var imgPath = input.value
     var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase()
-    var _this = this
-    var _editTodo = (src) => {
-      todo.text = value
-      todo.src = src
-      console.log(todo);
-    }
+
     if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
       if (typeof (FileReader) != "undefined") {
-        //loop for each file selected for uploaded.
-        files.forEach( (info, idx) => {
-          setTimeout
-          var reader = new FileReader()
-          reader.onload = function (e) {
+
+        var reader = new FileReader()
+        reader.onload = function(e) {
             var src = e.target.result
-            _editTodo(src)
-          }
-          //image_holder.show();
-          reader.readAsDataURL(input.files[idx])
-        })
+            if(typeof value !== 'undefined') {
+              todo.text = value
+            }
+            if(typeof src !== 'undefined') {
+              todo.src = src
+            }
+        }
+        reader.readAsDataURL(input.files[0])
+        
       } else {
         alert("This browser does not support FileReader.")
       }
     } else {
       alert("Pls select only images")
     }
+
   },
   getTodo (state) {
     var _data = []
@@ -87,8 +77,12 @@ export const mutations = {
   },
 
   editTodo (state, { todo, value, src }) {
-    todo.text = value
-    todo.src = src
+    if(typeof value !== 'undefined') {
+      todo.text = value
+    }
+    if(typeof src !== 'undefined') {
+      todo.src = src
+    }
   },
 
   toggleAll (state, { done }) {
