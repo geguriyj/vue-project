@@ -1,3 +1,114 @@
+
+<template>
+  <section class="todoapp">
+    <!-- header -->
+    <header class="header">
+      <h1>설문</h1>
+      <input class="new-todo"
+             autofocus
+             autocomplete="off"
+             placeholder="What needs to be done?"
+             @keyup.enter="addTodo">
+    </header>
+    <!-- main section -->
+    <section class="main" v-show="todos.length">
+      <ul class="todo-list">
+        <todo v-for="todo in filteredTodos" :todo="todo"></todo>
+      </ul>
+    </section>
+    <div id="datepicker"></div>
+    <div id="bottomPop"></div>
+    <!-- footer -->
+    <footer class="footer" v-show="todos.length">
+      <ul class="filters">
+        <li>
+          <a :href="'#/'" @click="MoveUp()">UP</a>
+          <a :href="'#/'" @click="MoveDown()">DOWN</a>
+        </li>
+      </ul>
+      <button class="delete" @click="clearCompleted">
+        DELETE
+      </button>
+    </footer>
+  </section>
+</template>
+
+<script>
+  import { mapMutations } from 'vuex'
+  import Todo from './Todo.vue'
+
+
+  import Vue from 'vue'
+  import { Toast } from 'mint-ui'
+  import { Indicator } from 'mint-ui'
+  import 'mint-ui/lib/style.css';
+
+  // import Picker from './DatePicker.vue'
+  // new Vue({
+  //   el: '#datepicker',
+  //   render: h => h(Picker)
+  // })
+
+
+  const filters = {
+        all: todos => todos,
+        active: todos => todos.filter(todo => !todo.done),
+        completed: todos => todos.filter(todo => todo.done)
+  }
+
+  export default {
+    components: { Todo },
+    data () {
+      return {
+        visibility: 'all',
+        filters: filters
+      }
+    },
+    created () {
+        Indicator.open()
+        this.$store.commit('getTodo')
+        setTimeout(h => {
+          Indicator.close()
+      }, 500)
+    },
+    computed: {
+      todos () {
+        return this.$store.state.todos
+      },
+      allChecked () {
+        return this.todos.every(todo => todo.done)
+      },
+      filteredTodos () {
+        return filters[this.visibility](this.todos)
+      },
+      remaining () {
+        return this.todos.filter(todo => !todo.done).length
+      }
+    },
+    methods: {
+      onValuesChange () {
+
+      },
+      addTodo (e) {
+        var text = e.target.value
+        if (text.trim()) {
+          this.$store.commit('addTodo', { text })
+        }
+        e.target.value = ''
+      },
+
+      ...mapMutations([
+        'toggleAll',
+        'clearCompleted'
+      ])
+    },
+    filters: {
+      pluralize: (n, w) => n === 1 ? w : (w + 's'),
+        capitalize: s => s.charAt(0).toUpperCase() + s.slice(1)
+    }
+  }
+</script>
+
 <style src="todomvc-app-css/index.css"></style>
 <style>
 
@@ -69,111 +180,3 @@
     border-color: rgba(175, 47, 47, 0.1);
   }
 </style>
-<template>
-  <section class="todoapp">
-    <!-- header -->
-    <header class="header">
-      <h1>설문</h1>
-      <input class="new-todo"
-             autofocus
-             autocomplete="off"
-             placeholder="What needs to be done?"
-             @keyup.enter="addTodo">
-    </header>
-    <!-- main section -->
-    <section class="main" v-show="todos.length">
-      <ul class="todo-list">
-        <todo v-for="todo in filteredTodos" :todo="todo"></todo>
-      </ul>
-    </section>
-    <section class="main">
-      <mt-picker :slots="slots" @change="onValuesChange"></mt-picker>
-    </section>
-    <!-- footer -->
-    <footer class="footer" v-show="todos.length">
-      <ul class="filters">
-        <li>
-          <a :href="'#/'" @click="MoveUp()">UP</a>
-          <a :href="'#/'" @click="MoveDown()">DOWN</a>
-        </li>
-      </ul>
-      <button class="delete"
-              @click="clearCompleted">
-        DELETE
-      </button>
-    </footer>
-  </section>
-</template>
-
-<script>
-  import { mapMutations } from 'vuex'
-  import Todo from './Todo.vue'
-  import DatePicker from './DatePicker.vue'
-
-  import Vue from 'vue'
-  import { Toast } from 'mint-ui'
-  import { Indicator } from 'mint-ui'
-  import 'mint-ui/lib/style.css';
-
-
-  // import Toast from 'vue-toast-mobile';
-  //import 'mint-ui/lib/style.css';
-
-  const filters = {
-        all: todos => todos,
-    active: todos => todos.filter(todo => !todo.done),
-  completed: todos => todos.filter(todo => todo.done)
-  }
-
-  export default {
-    components: { Todo },
-    data () {
-      return {
-        visibility: 'all',
-        filters: filters
-      }
-    },
-    created () {
-      Indicator.open()
-      this.$store.commit('getTodo')
-      setTimeout(h => {
-        Indicator.close()
-    }, 500)
-    },
-    computed: {
-      todos () {
-        return this.$store.state.todos
-      },
-      allChecked () {
-        return this.todos.every(todo => todo.done)
-      },
-      filteredTodos () {
-        return filters[this.visibility](this.todos)
-      },
-      remaining () {
-        return this.todos.filter(todo => !todo.done).length
-      }
-    },
-    methods: {
-      onValuesChange () {
-
-      },
-      addTodo (e) {
-        var text = e.target.value
-        if (text.trim()) {
-          this.$store.commit('addTodo', { text })
-        }
-        e.target.value = ''
-      },
-
-      ...mapMutations([
-        'toggleAll',
-        'clearCompleted'
-      ])
-  },
-  filters: {
-    pluralize: (n, w) => n === 1 ? w : (w + 's'),
-      capitalize: s => s.charAt(0).toUpperCase() + s.slice(1)
-  }
-  }
-</script>

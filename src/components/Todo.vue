@@ -28,7 +28,7 @@
   // Vue.component(Checklist.name, Checklist);
 
   export default {
-    name: 'Todo',
+    name: 'todo',
     props: ['todo'],
     data () {
       return {
