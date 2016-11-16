@@ -1,7 +1,5 @@
 <template>
-  <section class="main">
-    <mt-picker :slots="slots" @change="onValuesChange"></mt-picker>
-  </section>
+  <mt-picker :slots="slots" @change="onValuesChange"></mt-picker>
 </template>
 
 <script>
@@ -12,6 +10,7 @@ import { Picker } from 'mint-ui';
 Vue.component(Picker.name, Picker);
 
 export default {
+  name: 'picker',
   methods: {
     onValuesChange(picker, values) {
       if (values[0] > values[1]) {

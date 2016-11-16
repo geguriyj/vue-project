@@ -1,9 +1,9 @@
 <template>
   <section class="main">
-    <mt-popup
-      v-model="popupVisible"
-      position="bottom">
-    </mt-popup>
+    <mt-actionsheet
+      :actions="actions"
+      v-model="sheetVisible">
+    </mt-actionsheet>
     <ul class="filters">
         <li>
           <a :href="'#/'" @click="openPop()">openPop</a>
@@ -16,19 +16,28 @@
 
 import Vue from 'vue'
 
-import { Popup } from 'mint-ui';
+import { Actionsheet } from 'mint-ui';
 
-Vue.component(Popup.name, Popup);
+Vue.component(Actionsheet.name, Actionsheet);
 
 export default {
   methods: {
     openPop() {
-      this.popupVisible = true;
+      this.sheetVisible = true
+    },
+    callback(type) {
+      alert(type);
     }
   },
   data() {
     return {
-      popupVisible: false
+      cancelText: "CANCEL",
+      sheetVisible : false,
+      actions: [
+        { name: "MENU 1", method: (n) => { this.callback(0) } }, 
+        { name: "MENU 2", method: () => { this.callback(1)  } },
+        { name: "MENU 3", method: () => { this.callback(2) } }
+      ]
     }
   }
 }
