@@ -3,12 +3,12 @@
     <input class="toggle" name="group1" type="radio" @change="toggleTodo({ todo: todo })">
     <label v-show="!editing" v-text="todo.text" @dblclick="editing = true"></label>
     <input class="edit"
-           v-show="editing"
-           v-focus="editing"
-           :value="todo.text"
-           @keyup.enter="doneEdit"
-           @keyup.esc="cancelEdit"
-           @blur="doneEdit">
+       v-show="editing"
+       v-focus="editing"
+       :value="todo.text"
+       @keyup.enter="doneEdit"
+       @keyup.esc="cancelEdit"
+       @blur="doneEdit">
     <img v-show="todo.src" :src="todo.src"/>
     <div class="fileUpload">
       <span>Upload</span>

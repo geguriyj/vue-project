@@ -4,26 +4,12 @@
     <header class="header">
       <h1>설문</h1>
       <input class="new-todo"
-             autofocus
-             autocomplete="off"
-             placeholder="설문 상세 내용을 입력하세요.">
+         autofocus
+         autocomplete="off"
+         placeholder="설문 상세 내용을 입력하세요.">
     </header>
     <!-- main section -->
-    <section class="main">
-      <checklist></checklist>
-    </section>
-    <section class="main">
-      <radiolist></radiolist>
-    </section>
-    <section class="main">
-      <singletext></singletext>
-    </section>
-    <section class="main">
-      <multitext></multitext>
-    </section>
-    <section class="main">
-      <picker></picker>
-    </section>
+    <formContainer v-for="item in myList" :key="item.formId"></formContainer>
     <!-- footer -->
     <footer class="footer">
       <ul class="filters">
@@ -41,28 +27,19 @@
 
 <script>
 
-import Vue from 'vue'
+import { mapState } from 'vuex'
 
-import checklist from './components/CheckList.vue'
-import radiolist from './components/RadioList.vue'
-import singletext from './components/SingleText.vue'
-import multitext from './components/MultiText.vue'
-import picker from './components/DatePicker.vue'
+import formContainer from './components/FormContainer.vue'
 
 export default {
   name: 'app',
   components: { 
-    checklist, radiolist, singletext, multitext, picker
+    formContainer
   },
-  methods: {
-    clearCompleted() {
-
-    },
-    MoveUp() {
-
-    },
-    MoveDown() {
-      
+  computed: {
+    myList () {
+      console.log(this.$store.state, this.$store.state.components)
+      return this.$store.state.components;
     }
   }
 }

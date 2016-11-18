@@ -1,8 +1,8 @@
 <template>
   <div>
     <input class="new-todo"
-           autocomplete="off"
-           placeholder="질문을 입력하세요.(멀티선택)">
+       autocomplete="off"
+       placeholder="질문을 입력하세요.(멀티선택)">
     <ul class="todo-list">
       <checkbox v-for="todo in filteredTodos" :todo="todo"></checkbox>
     </ul>
@@ -12,9 +12,9 @@
 <script>
 
   const filters = {
-        all: todos => todos,
-        active: todos => todos.filter(todo => !todo.done),
-        completed: todos => todos.filter(todo => todo.done)
+    all: todos => todos,
+    active: todos => todos.filter(todo => !todo.done),
+    completed: todos => todos.filter(todo => todo.done)
   }
 
   import Vue from 'vue'

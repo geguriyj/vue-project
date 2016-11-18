@@ -1,8 +1,6 @@
 <template>
   <section class="main">
-    <mt-actionsheet
-      :actions="actions"
-      v-model="sheetVisible">
+    <mt-actionsheet :actions="actions" v-model="sheetVisible">
     </mt-actionsheet>
     <ul class="filters">
         <li>
