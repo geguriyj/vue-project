@@ -3,7 +3,7 @@ import { set } from 'vue'
 export default {
 
   addForm (state, { formData }) {
-    createForm(state, formData.authority.formId, formData.authority, formData.components);
+    createForm(state, 'suvery1001', formData);
   }
 
   // saveForm (state, { forms }) {
@@ -22,11 +22,10 @@ export default {
 }
 
 
-function createForm (state, id, authority, components) {
-  set(state, id, {
+function createForm (state, id, components) {
+  set(state.forms, id, {
     formId: id,
-    authority: authority,
-    formlist: components
+    components: components
   })
   console.log('mutations ', components);
 }

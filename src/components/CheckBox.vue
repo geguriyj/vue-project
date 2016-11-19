@@ -1,15 +1,8 @@
 <template>
   <li class="todo" :class="{ editing: editing }">
-    <input class="toggle" type="checkbox" @change="toggleTodo({ todo: todo })">
-    <label v-show="!editing" v-text="todo.text" @dblclick="editing = true"></label>
-    <input class="edit"
-       v-show="editing"
-       v-focus="editing"
-       :value="todo.text"
-       @keyup.enter="doneEdit"
-       @keyup.esc="cancelEdit"
-       @blur="doneEdit">
-    <img v-show="todo.src" :src="todo.src"/>
+    <input class="toggle" type="checkbox">
+    <label v-text="item.componentTitle.ko"></label>
+    <img v-show="item.src" :src="item.src"/>
     <div class="fileUpload">
       <span>Upload</span>
       <input type="file" class="upload" @change="addImage({ todo: todo }, $event)"/>
@@ -26,7 +19,9 @@
 
   export default {
     name: 'item',
-    props: ['todo'],
+    props: {
+      item: Object
+    },
     data () {
       return {
         editing: true

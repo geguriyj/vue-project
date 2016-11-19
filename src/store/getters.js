@@ -1,6 +1,6 @@
-export const getComponents = state => state.formlist
+export const formlist = state => state.forms
 
-export const getInfo = state => {
-	debugger;
-  
+export const forms = state => {
+  const forms = state.forms['suvery1001']
+  return forms
 }

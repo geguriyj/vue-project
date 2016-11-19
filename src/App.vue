@@ -27,7 +27,7 @@
 
 <script>
 
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 import formContainer from './components/FormContainer.vue'
 
@@ -37,12 +37,19 @@ export default {
     formContainer
   },
   computed: {
+    ...mapGetters({
+      forms: 'formlist'
+    }),
     myList () {
-      console.log(this.$store.state, this.$store.state.components)
-      return this.$store.state.components;
+      console.log('myList ', this.forms['suvery1001'])
+      return this.forms['suvery1001'];
     }
   }
 }
+
+
+
+
 
 
 // // 하단에서 열리는 메뉴팝업

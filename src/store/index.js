@@ -7,9 +7,7 @@ import mutations from './mutations'
 Vue.use(Vuex);
 
 const state = {
-  formId: null,
-  authority: [],
-  formlist: []
+	forms : {}
 };
 
 export default new Vuex.Store({

@@ -1,35 +1,4 @@
-module.exports = {
-    "docInfo": {
-        "schemaVersion": "0.0.1",
-        "revision": 65,
-        "updateDate": "2016-11-01T04:05:06+08:00"
-    },
-    "authority": {
-        "domainId": "101",
-        "userId": "35136",
-        "formId": "suvery1001"
-    },
-    "status": "open",
-    "outline": {
-        "formTitle": {
-            "en": "Customer Satisfaction form",
-            "ko": "고객 만족도 설문 조사",
-            "ja": "顧客満足度アンケート調査"
-        },
-        "formDescription": {
-            "en": "XXXXXXXXXXXXXXX",
-            "ko": "향후 더 나은 서비스를 하기 위해 설문 조사를 하고 있습니다.\n아래 질문에 해당하는 답변을 선택해주세요.",
-            "ja": "XXXXXXXXXXXXXXX"
-        },
-        "themeId": "1143"
-    },
-    "settings": {
-        "expiry": ["set", {
-            "startDate": "2016-09-12",
-            "endDate": "2016-09-16"
-        }]
-    },
-    "components": [
+module.exports = [
         {
             "componentId": "1",
             "componentTitle": {
@@ -172,4 +141,3 @@ module.exports = {
             ]
         }
     ]
-}

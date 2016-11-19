@@ -4,18 +4,13 @@
        autocomplete="off"
        placeholder="질문을 입력하세요.(멀티선택)">
     <ul class="todo-list">
-      <checkbox v-for="todo in filteredTodos" :todo="todo"></checkbox>
+      <checkbox v-for="item in items" :item="item"></checkbox>
     </ul>
   </div>
 </template>
 
 <script>
 
-  const filters = {
-    all: todos => todos,
-    active: todos => todos.filter(todo => !todo.done),
-    completed: todos => todos.filter(todo => todo.done)
-  }
 
   import Vue from 'vue'
 
@@ -24,8 +19,6 @@
   import store from '../store'
   import checkbox from './CheckBox.vue'
   
-  // Vue.component('item', Item)
-
 
   import { Indicator } from 'mint-ui'
   import 'mint-ui/lib/style.css'
@@ -36,30 +29,20 @@
     store,
     data () {
       return {
-        visibility: 'all',
-        filters: filters
+        items: this.$store.getters.forms.components
       }
     },
     created () {
         Indicator.open()
-        this.$store.commit('getTodo')
+        console.log(this.items);
         setTimeout(h => {
           Indicator.close()
       }, 500)
     },
     computed: {
-      todos () {
-        return this.$store.state.todos
-      },
-      allChecked () {
-        return this.todos.every(todo => todo.done)
-      },
-      filteredTodos () {
-        return filters[this.visibility](this.todos)
-      },
-      remaining () {
-        return this.todos.filter(todo => !todo.done).length
-      }
+      // components () {
+      //   return this.$store.state.forms
+      // }
     },
     methods: {
       onValuesChange () {
@@ -71,16 +54,7 @@
           this.$store.commit('addTodo', { text })
         }
         e.target.value = ''
-      },
-
-      ...mapMutations([
-        'toggleAll',
-        'clearCompleted'
-      ])
-    },
-    filters: {
-      pluralize: (n, w) => n === 1 ? w : (w + 's'),
-        capitalize: s => s.charAt(0).toUpperCase() + s.slice(1)
+      }
     }
   }
 </script>

@@ -4,9 +4,7 @@ import store from './store'
 import { getForm } from './store/actions'
 
 
-// Vue.config.debug = true
-
-getForm(store);
+Vue.config.debug = true
 
 new Vue({
     el: '#app',
@@ -14,4 +12,6 @@ new Vue({
     render: h => h(App)
 })
 
+console.log('main.js ', store)
 
+getForm(store);

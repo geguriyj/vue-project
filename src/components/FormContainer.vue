@@ -1,6 +1,6 @@
 <template>
   <section class="main">
-    <checklist>{{item.componentId}}</checklist>
+    <checklist>aa{{item}}</checklist>
   </section>
 </template>
 
