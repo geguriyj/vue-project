@@ -2,17 +2,30 @@
   <section class="main">
     <div v-for="component in components" :component="component">
       
-      <checklist 
-        class="block"
-        v-if="component.componentType=='checkbox'"
-        :key="component.componentId"
-        :component="component"></checklist>
-
       <radiolist
         class="block"
         v-if="component.componentType=='radio'" 
         :key="component.componentId"
         :component="component"></radiolist>
+
+     <checklist 
+        class="block"
+        v-if="component.componentType=='checkbox'"
+        :key="component.componentId"
+        :component="component"></checklist>
+
+      <singletext
+        class="block"
+        v-if="component.componentType=='single'" 
+        :key="component.componentId"
+        :component="component"></singletext>
+
+      <multitext
+        class="block"
+        v-if="component.componentType=='multi'" 
+        :key="component.componentId"
+        :component="component"></multitext> 
+
 
     </div>
   </section>

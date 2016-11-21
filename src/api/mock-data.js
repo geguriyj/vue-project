@@ -18,7 +18,7 @@ module.exports = [
             },
             "choices": [
                 {
-                    "choiceId": "1",
+                    "choiceId": "111",
                     "choiceDescription": {
                         "en": "xxx",
                         "ko": "1년 미만",
@@ -27,7 +27,7 @@ module.exports = [
                     "imageUrl": ""
                 },
                 {
-                    "choiceId": "2",
+                    "choiceId": "222",
                     "choiceDescription": {
                         "en": "xxx",
                         "ko": "1~2년",
@@ -36,7 +36,7 @@ module.exports = [
                     "imageUrl": ""
                 },
                 {
-                    "choiceId": "3",
+                    "choiceId": "333",
                     "choiceDescription": {
                         "en": "xxx",
                         "ko": "2~3년",
@@ -53,7 +53,7 @@ module.exports = [
                 "ko": "2. 귀사의 직원은 몇 명입니까?",
                 "ja": ""
             },
-            "componentType": "checkbox",
+            "componentType": "radio",
             "extraInfo": {
                 "general": {
                     "requirement": true
@@ -64,7 +64,7 @@ module.exports = [
             },
             "choices": [
                 {
-                    "choiceId": "1",
+                    "choiceId": "11",
                     "choiceDescription": {
                         "en": "xxx",
                         "ko": "10명 미만",
@@ -73,7 +73,7 @@ module.exports = [
                     "imageUrl": ""
                 },
                 {
-                    "choiceId": "2",
+                    "choiceId": "22",
                     "choiceDescription": {
                         "en": "xxx",
                         "ko": "10~50명",
@@ -82,7 +82,7 @@ module.exports = [
                     "imageUrl": ""
                 },
                 {
-                    "choiceId": "3",
+                    "choiceId": "33",
                     "choiceDescription": {
                         "en": "xxx",
                         "ko": "50~100명",
@@ -91,7 +91,7 @@ module.exports = [
                     "imageUrl": ""
                 },
                 {
-                    "choiceId": "4",
+                    "choiceId": "44",
                     "choiceDescription": {
                         "en": "xxx",
                         "ko": "100명 이상",
@@ -108,7 +108,7 @@ module.exports = [
                 "ko": "3. 당사를 처음 알게 된 경로는 무엇입니까?",
                 "ja": ""
             },
-            "componentType": "radio",
+            "componentType": "checkbox",
             "extra": {
                 "general": {
                     "requirement": true
@@ -146,5 +146,41 @@ module.exports = [
                     "imageUrl": ""
                 }
             ]
+        },
+        {
+            "componentId": "4",
+            "componentTitle": {
+                "en": "xxx",
+                "ko": "4. 당사의 단점은 무엇입니까?",
+                "ja": ""
+            },
+            "componentType": "single",
+            "extra": {
+                "general": {
+                    "requirement": true
+                },
+                "layout": {
+                    "sortOrder": "horizontal"
+                }
+            },
+            "componentDescription": ""
+        },
+        {
+            "componentId": "5",
+            "componentTitle": {
+                "en": "xxx",
+                "ko": "5. 당사의 장점은 무엇입니까?",
+                "ja": ""
+            },
+            "componentType": "multi",
+            "extra": {
+                "general": {
+                    "requirement": true
+                },
+                "layout": {
+                    "sortOrder": "horizontal"
+                }
+            },
+            "componentDescription": ""
         }
     ]

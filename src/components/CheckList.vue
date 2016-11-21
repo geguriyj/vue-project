@@ -16,7 +16,7 @@
 
   import store from '../store'
   import checkbox from './CheckBox.vue'
-  
+
 
   import { Indicator } from 'mint-ui'
   import 'mint-ui/lib/style.css'
@@ -46,7 +46,7 @@
       }
     },
     methods: {
-      
+
     }
   }
 </script>

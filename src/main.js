@@ -12,6 +12,4 @@ new Vue({
     render: h => h(App)
 })
 
-console.log('main.js ', store)
-
 getForm(store);

@@ -1,7 +1,7 @@
 <template>
   <li class="todo">
-    <input class="toggle" type="checkbox">
-    <label>{{choice.choiceDescription.ko}}</label>
+    <input class="toggle" type="checkbox" :id="choice.choiceDescription.id">
+    <label v-text="choice.choiceDescription.ko"></label>
   </li>
 </template>
 
@@ -20,7 +20,7 @@
       }
     },
     methods: {
-      
+
     }
   }
 </script>
