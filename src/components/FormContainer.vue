@@ -1,6 +1,20 @@
 <template>
   <section class="main">
-    <checklist>aa{{item}}</checklist>
+    <div v-for="component in components" :component="component">
+      
+      <checklist 
+        class="block"
+        v-if="component.componentType=='checkbox'"
+        :key="component.componentId"
+        :component="component"></checklist>
+
+      <radiolist
+        class="block"
+        v-if="component.componentType=='radio'" 
+        :key="component.componentId"
+        :component="component"></radiolist>
+
+    </div>
   </section>
 </template>
 
@@ -18,7 +32,11 @@ export default {
   components: {
     checklist, radiolist, singletext, multitext, picker
   },
-  props: ['item'],
+  props: [
+    'components'
+  ],
+  computed: {
+  },
   
   methods: {
     MoveUp() {
@@ -28,3 +46,16 @@ export default {
   }
 }
 </script>
+
+
+<style>
+
+.main .block {
+  margin-top: 5px;
+  border: 2px solid #C4DDDF;
+}
+.main .title {
+  font-size: 20px;
+}
+
+</style>

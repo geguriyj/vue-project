@@ -23,7 +23,8 @@ module.exports = [
                         "en": "xxx",
                         "ko": "1년 미만",
                         "ja": ""
-                    }
+                    },
+                    "imageUrl": ""
                 },
                 {
                     "choiceId": "2",
@@ -31,7 +32,8 @@ module.exports = [
                         "en": "xxx",
                         "ko": "1~2년",
                         "ja": ""
-                    }
+                    },
+                    "imageUrl": ""
                 },
                 {
                     "choiceId": "3",
@@ -39,7 +41,8 @@ module.exports = [
                         "en": "xxx",
                         "ko": "2~3년",
                         "ja": ""
-                    }
+                    },
+                    "imageUrl": ""
                 }
             ]
         },
@@ -66,7 +69,8 @@ module.exports = [
                         "en": "xxx",
                         "ko": "10명 미만",
                         "ja": ""
-                    }
+                    },
+                    "imageUrl": ""
                 },
                 {
                     "choiceId": "2",
@@ -74,7 +78,8 @@ module.exports = [
                         "en": "xxx",
                         "ko": "10~50명",
                         "ja": ""
-                    }
+                    },
+                    "imageUrl": ""
                 },
                 {
                     "choiceId": "3",
@@ -82,7 +87,8 @@ module.exports = [
                         "en": "xxx",
                         "ko": "50~100명",
                         "ja": ""
-                    }
+                    },
+                    "imageUrl": ""
                 },
                 {
                     "choiceId": "4",
@@ -90,7 +96,8 @@ module.exports = [
                         "en": "xxx",
                         "ko": "100명 이상",
                         "ja": ""
-                    }
+                    },
+                    "imageUrl": ""
                 }
             ]
         },

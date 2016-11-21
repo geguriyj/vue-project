@@ -1,20 +1,7 @@
 <template>
-  <li class="todo" :class="{ editing: editing }">
-    <input class="toggle" name="group1" type="radio" @change="toggleTodo({ todo: todo })">
-    <label v-show="!editing" v-text="todo.text" @dblclick="editing = true"></label>
-    <input class="edit"
-       v-show="editing"
-       v-focus="editing"
-       :value="todo.text"
-       @keyup.enter="doneEdit"
-       @keyup.esc="cancelEdit"
-       @blur="doneEdit">
-    <img v-show="todo.src" :src="todo.src"/>
-    <div class="fileUpload">
-      <span>Upload</span>
-      <input type="file" class="upload" @change="addImage({ todo: todo }, $event)"/>
-    </div>
-    <button class="remove" @click="deleteTodo({ todo: todo })">X</button>
+  <li class="todo">
+    <input class="toggle" type="radio" :name="'rdo_group_'+componentId">
+    <label>{{choice.choiceDescription.ko}}</label>
   </li>
 </template>
 
@@ -25,52 +12,15 @@
   import { mapMutations } from 'vuex'
 
   export default {
-    name: 'radio',
-    props: ['todo'],
+    name: 'radiobox',
+    props: ['choice'],
     data () {
       return {
-        editing: true
-      }
-    },
-    directives: {
-      focus (el, { value }, { context }) {
-        if (value) {
-          context.$nextTick(() => {
-            el.focus()
-        })
-        }
+        componentId: this.$store.state.forms.componentId
       }
     },
     methods: {
-      ...mapMutations([
-        'editTodo',
-        'toggleTodo',
-        'deleteTodo'
-      ]),
-      doneEdit (e) {
-        const value = e.target.value.trim()
-        const { todo } = this
-        if (!value) {
-          this.deleteTodo({
-            todo
-          })
-        } else if (this.editing) {
-          this.editTodo({
-            todo,
-            value
-          })
-          //this.editing = false
-        }
-      },
-      cancelEdit (e) {
-        e.target.value = this.todo.text
-        this.editing = false
-      },
-      addImage (data, evt) {
-        var todo = data.todo
-        var value = todo.text ? todo.text : '이미지';
-        this.$store.commit('setImage', { todo, value, evt })
-      }
+      
     }
   }
 </script>

@@ -3,22 +3,16 @@ import { set } from 'vue'
 export default {
 
   addForm (state, { formData }) {
-    createForm(state, 'suvery1001', formData);
+    createForm(state, state.formId, formData);
+  },
+
+  currentForm (state, { id }) {
+    state.formId = id;
+  },
+  currentComponent (state, { id }) {
+    state.forms.componentId = id;
   }
 
-  // saveForm (state, { forms }) {
-  //   debugger;
-  //   Vue.set(state, formData.authority.formId, { formData });
-  // }
-
-  // editForm (state, { id, form, value, src }) {
-  //   if(typeof value !== 'undefined') {
-  //     form.text = value
-  //   }
-  //   if(typeof src !== 'undefined') {
-  //     form.src = src
-  //   }
-  // }
 }
 
 
@@ -27,5 +21,4 @@ function createForm (state, id, components) {
     formId: id,
     components: components
   })
-  console.log('mutations ', components);
 }

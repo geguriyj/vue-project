@@ -1,20 +1,18 @@
 <template>
   <div>
-    <input class="new-todo"
-       autocomplete="off"
-       placeholder="질문을 입력하세요.(멀티선택)">
+    <label class="title" v-text="component.componentTitle.ko"></label>
     <ul class="todo-list">
-      <checkbox v-for="item in items" :item="item"></checkbox>
+      <checkbox v-for="choice in choiceList" :choice="choice"></checkbox>
     </ul>
   </div>
 </template>
 
 <script>
 
-
   import Vue from 'vue'
 
   import { mapMutations } from 'vuex'
+  import { mapGetters } from 'vuex'
 
   import store from '../store'
   import checkbox from './CheckBox.vue'
@@ -24,37 +22,31 @@
   import 'mint-ui/lib/style.css'
 
   export default {
-    name: 'itembox',
+    name: 'checklist',
     components: { checkbox },
     store,
+    props: ['component'],
     data () {
       return {
-        items: this.$store.getters.forms.components
+        componentId: this.component.componentId
       }
     },
     created () {
         Indicator.open()
-        console.log(this.items);
+
+        this.$store.commit('currentComponent', { id: this.componentId})
+
         setTimeout(h => {
           Indicator.close()
       }, 500)
     },
     computed: {
-      // components () {
-      //   return this.$store.state.forms
-      // }
+      choiceList () {
+        return this.$store.getters.choices
+      }
     },
     methods: {
-      onValuesChange () {
-
-      },
-      addTodo (e) {
-        var text = e.target.value
-        if (text.trim()) {
-          this.$store.commit('addTodo', { text })
-        }
-        e.target.value = ''
-      }
+      
     }
   }
 </script>

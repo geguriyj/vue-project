@@ -9,7 +9,7 @@
          placeholder="설문 상세 내용을 입력하세요.">
     </header>
     <!-- main section -->
-    <formContainer v-for="item in myList" :key="item.formId"></formContainer>
+    <formContainer v-for="components in myForm" :components="components"></formContainer>
     <!-- footer -->
     <footer class="footer">
       <ul class="filters">
@@ -33,16 +33,18 @@ import formContainer from './components/FormContainer.vue'
 
 export default {
   name: 'app',
-  components: { 
+  components: {
     formContainer
+  },
+  created () {
+    this.$store.commit('currentForm', { id: 'suvery1001'})
   },
   computed: {
     ...mapGetters({
-      forms: 'formlist'
+      form: 'form'
     }),
-    myList () {
-      console.log('myList ', this.forms['suvery1001'])
-      return this.forms['suvery1001'];
+    myForm () {
+      return this.form;
     }
   }
 }
@@ -65,7 +67,7 @@ export default {
 <style src="todomvc-app-css/index.css"></style>
 <style>
 
-  .main {
+  .main2 {
     margin-bottom: 50px;
     border: 2px solid #C4DDDF;
   }
