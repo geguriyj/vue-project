@@ -10,8 +10,9 @@ export default {
     state.formId = id;
   },
   currentComponent (state, { id }) {
-    console.log('currentComponent')
+    console.log('currentComponent ', id)
     state.forms.componentId = id;
+    console.log('currentComponent ', state.forms.componentId)
   }
 
 }

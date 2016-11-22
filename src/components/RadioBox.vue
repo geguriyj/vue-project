@@ -1,7 +1,7 @@
 <template>
   <li class="todo">
     <input class="toggle" type="radio" :name="'rdo_group_'+componentId">
-    <label v-text="choice.choiceDescription.ko"></label>
+    <label>{{choice.choiceDescription.ko}}</label>
   </li>
 </template>
 

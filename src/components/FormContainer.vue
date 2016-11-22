@@ -1,14 +1,15 @@
 <template>
   <section class="main">
-    <div v-for="component in components" :component="component">
+    
+    <template v-for="component in components" :component="component">
       
       <radiolist
         class="block"
-        v-if="component.componentType=='radio'" 
+        v-if="component.componentType=='radio'"
         :key="component.componentId"
         :component="component"></radiolist>
 
-     <checklist 
+      <checklist 
         class="block"
         v-if="component.componentType=='checkbox'"
         :key="component.componentId"
@@ -24,10 +25,10 @@
         class="block"
         v-if="component.componentType=='multi'" 
         :key="component.componentId"
-        :component="component"></multitext> 
+        :component="component"></multitext>
 
+    </template>
 
-    </div>
   </section>
 </template>
 
