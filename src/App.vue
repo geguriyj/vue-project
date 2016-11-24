@@ -27,27 +27,27 @@
 
 <script>
 
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
-import formContainer from './components/FormContainer.vue'
+import formContainer from "./components/FormContainer.vue";
 
 export default {
-  name: 'app',
-  components: {
-    formContainer
-  },
-  created () {
-    this.$store.commit('currentForm', { id: 'suvery1001'})
-  },
-  computed: {
-    ...mapGetters({
-      form: 'form'
-    }),
-    myForm () {
-      return this.form;
+    name: "app",
+    components: {
+        formContainer
+    },
+    created() {
+        // this.$store.commit("currentForm", { formId: "suvery1001"});
+    },
+    computed: {
+        ...mapGetters([
+            "detailForm"
+        ]),
+        myForm() {
+            return this.detailForm;
+        }
     }
-  }
-}
+};
 
 
 

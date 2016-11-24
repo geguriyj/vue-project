@@ -1,28 +1,38 @@
-const data = require('./mock-data')
-const LATENCY = 16
+// import data from "./mock-data";
+// export const getForm = cb => {
+//     cb(data);
+// };
 
-export function getForm (cb) {
-  cb(data)
-}
+import axios from "axios";
 
-// export function setForm (cb) {
-//   setTimeout(() => {
-//     cb(data)
-//   }, LATENCY)
-// }
+// https://github.com/mzabriskie/axios
+axios.defaults.withCredentials = true;
+axios.interceptors.response.use(function(resp) {
+    return resp.data;
+}, function(error) {
+    return Promise.reject(error);
+});
 
-// export function saveForm ({ title, type, components }, cb) {
+const DOMAIN = "https://alpha.ndrive.navercorp.com";
 
-// 	debugger;
-	
-//   const timestamp = Date.now()
-//   const id = 'form_' + timestamp
-//   const formData = {
-// 	    formId: id,
-// 	    authority: type,
-// 	    components: components
-// 	}
-// 	setTimeout(function () {
-// 	cb(formData)
-// 	}, LATENCY)
-// }
+export const getForm = function({ id }) {
+
+		let oParam = {
+			"orgresource": "/",
+			"type": 1,
+			"depth": 0,
+			"sort": "name",
+			"order": "asc",
+			"startnum": 0,
+			"pagingrow": 10
+		};
+
+		axios.post(DOMAIN + "/GetList.ndrive", {
+				params: oParam
+		}).then(function(resp) {
+				console.log(resp);
+
+		}).catch(function(error) {
+
+		});
+};

@@ -2,7 +2,7 @@
   <section class="main">
     
     <template v-for="component in components" :component="component">
-      
+      {{component.componentType}}
       <radiolist
         class="block"
         v-if="component.componentType=='radio'"
@@ -34,31 +34,28 @@
 
 <script>
 
-import checklist from './CheckList.vue'
-import radiolist from './RadioList.vue'
-import singletext from './SingleText.vue'
-import multitext from './MultiText.vue'
-import picker from './DatePicker.vue'
+import checklist from "./CheckList.vue";
+import radiolist from "./RadioList.vue";
+import singletext from "./SingleText.vue";
+import multitext from "./MultiText.vue";
+import picker from "./DatePicker.vue";
 
 
 export default {
-  name: 'formContainer',
-  components: {
-    checklist, radiolist, singletext, multitext, picker
-  },
-  props: [
-    'components'
-  ],
-  computed: {
-  },
-  
-  methods: {
-    MoveUp() {
+    name: "formContainer",
+    components: {
+        checklist, radiolist, singletext, multitext, picker
     },
-    MoveDown() {
+    props: [
+        "components"
+    ],
+    created() {
+    },
+    computed: {
+    },
+    methods: {
     }
-  }
-}
+};
 </script>
 
 

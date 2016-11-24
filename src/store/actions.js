@@ -1,17 +1,8 @@
-import * as api from '../api'
+import * as api from "../api";
+import * as types from "./mutation-types";
 
 export const getForm = ({ commit }) => {
-  api.getForm(formData => {
-    commit('addForm', {
-      formData
-    })
-  })
-}
-
-// export const saveForm = ({ commit }, payload) => {
-//   api.saveForm(payload, formData => {
-//     commit('saveForm', {
-//       formData
-//     })
-//   })
-// }
+    api.getForm(payload => {
+        commit(types.FETCHED_FORM, { payload });
+    });
+};

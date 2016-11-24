@@ -9,35 +9,31 @@
 
 <script>
 
-import Vue from 'vue'
+import store from "../store";
 
-import store from '../store'
-
-import { Indicator } from 'mint-ui'
-import 'mint-ui/lib/style.css'
+import { Indicator } from "mint-ui";
+import "mint-ui/lib/style.css";
 
 export default {
-  name: 'singletext',
-  store,
-  props: ['component'],
-  data () {
-    return {
-      componentId: this.component.componentId
+    name: "singletext",
+    store,
+    props: ["component"],
+    data() {
+        return {
+            componentId: this.component.componentId
+        };
+    },
+    created() {
+        Indicator.open();
+        // this.$store.commit("currentComponent", { id: this.componentId});
+        setTimeout(h => {
+            Indicator.close();
+        }, 500);
+    },
+    methods: {
+      
     }
-  },
-  created () {
-      Indicator.open()
-
-      this.$store.commit('currentComponent', { id: this.componentId})
-
-      setTimeout(h => {
-        Indicator.close()
-    }, 500)
-  },
-  methods: {
-    
-  }
-}
+};
 
 </script>
 
