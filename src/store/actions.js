@@ -6,3 +6,8 @@ export const getForm = ({ commit }) => {
         commit(types.FETCHED_FORM, { payload });
     });
 };
+export const getReport = ({ commit }) => {
+  api.getReport(payload => {
+    commit(types.FETHED_REPORT, { payload });
+});
+};

@@ -8,78 +8,92 @@
 
 <script>
 
-//  import * as c3p from "../c3p";
-//  import * as insight from "../c3/theme/insight/insight";
+//  import d3 from "d3";
+//  import c3 from "c3";
+//  import c3p from "./c3p/c3p";
+//  window.c3p = c3p;
+//  import * as insight from "./c3p/theme/insight/insight";
+
   const d3 = require("d3");
   const c3 = require("c3");
-  const c3p = require("../c3/c3p");
+  const c3p = require("./c3p/c3p");
   window.c3p = c3p;
-  const insight = require("../c3/theme/insight/insight");
+  const insight = require("./c3p/theme/insight/insight");
 
   import Vue from "vue";
 
-  Vue.nextTick(() => {
-      const chart1 = c3p.generate("#donut_chart", "insight.donut", {
-        data: {
-          columns: [
-            ['모바일', 60],
-            ['PC', 40]
-          ]
-        },
-        color: {
-          pattern: ['#7294ce', '#aaa']
-        }
-      });
-
-      const chart2 = c3p.generate("#bar_chart", "insight.bar2", {
-        data: {
-          columns: [
-            ['x', '0-12', '13-18', '19-24', '25-29', '30-34', '30-39', '40-49', '50-59', '60-69', '70-79', '80-89'],
-            ['남', 40, 50, 100, 120, 150, 155, 200, 30, 45, 30, 45],
-            ['여', 30, 40, 40, 55, 50, 100, 25, 88, 22, 30, 45, 50]
-          ]
-        }
-      });
-  });
-
-
-//Vue.component('c3pChart', {
-//  template: '<div id="chart"></div>',
-//  data: {
-//    message: 'hello'
-//  }
-//});
-
   export default {
       name: "c3pChart",
+      props: [
+        "report"
+      ],
+      data() {
+        return {
+          "chartData": this.report.payload,
+          "p1": null
+        };
+      },
       created() {
+        const self = this;
+        const options = {
+          color: {
+            pattern: ['#7294ce', '#aaa']
+          }
+        };
 
+        Vue.nextTick(() => {
+
+          self.barChart(self.chartData[0], "insight.bar2", "");
+          self.donutChart(self.chartData[1], "insight.donut", options);
+
+//          this.p1 = new Promise(
+//              function(resolve, reject) {
+//                self.createChart(self.chartData[0], "", resolve);
+//              }
+//          );
+//          this.p1.then(
+//              function(){
+//                self.createChart(self.chartData[1], options);
+//              }
+//          );
+
+        });
       },
       methods: {
-          chart1 () {
-            const chart1 = c3p.generate("#chart", "insight.donut", {
-              data: {
-                columns: [
-                  ['모바일', 60],
-                  ['PC', 40]
-                ]
-              },
-              color: {
-                pattern: ['#7294ce', '#aaa']
-              }
-            });
-          },
-          chart2 () {
-            const chart2 = c3p.generate("#chart", "insight.bar2", {
-              data: {
-                columns: [
-                  ['x', '0-12', '13-18', '19-24', '25-29', '30-34', '30-39', '40-49', '50-59', '60-69', '70-79', '80-89'],
-                  ['남', 40, 50, 100, 120, 150, 155, 200, 30, 45, 30, 45],
-                  ['여', 30, 40, 40, 55, 50, 100, 25, 88, 22, 30, 45, 50]
-                ]
-              }
-            });
-          }
+        createChart(data, theme, opt) {
+          const options = opt ? opt : {};
+          console.log(data.reportType);
+
+          c3p.generate("#"+data.reportType+"_chart", theme, {
+            data: {
+              columns: data.chartData
+            },
+            options
+          });
+        },
+        barChart(data, theme, opt) {
+          const options = opt ? opt : {};
+          console.log(data.reportType);
+
+          c3p.generate("#"+data.reportType+"_chart", theme, {
+            data: {
+              columns: data.chartData
+            },
+            options
+          });
+        },
+        donutChart(data, theme, opt) {
+          const options = opt ? opt : {};
+          console.log(data.reportType);
+
+          c3p.generate("#"+data.reportType+"_chart", theme, {
+            data: {
+              columns: data.chartData
+            },
+            options
+          });
+        }
       }
   };
+
 </script>

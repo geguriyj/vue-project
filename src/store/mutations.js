@@ -21,7 +21,7 @@ export default {
 
                 reader.onload = function(e) {
                     const src = e.target.result;
-                    
+
                     if(typeof desc !== "undefined") {
                         choice.choiceDescription.ko = desc;
                     }
@@ -44,5 +44,8 @@ export default {
         const componentIdx = state.detailForm.payload.indexOf(component);
         const form = state.detailForm.payload[componentIdx];
         form.choices.splice(form.choices.indexOf(choice), 1);
+    },
+    [types.FETHED_REPORT] (state, payload) {
+      state.report = payload;
     }
 };

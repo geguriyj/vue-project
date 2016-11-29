@@ -8,6 +8,7 @@
          autocomplete="off"
          placeholder="설문 상세 내용을 입력하세요.">
     </header>
+    <c3pChart v-for="reports in myReport" :report="report"></c3pChart>
     <!-- main section -->
     <formContainer v-for="components in myForm" :components="components"></formContainer>
     <!-- footer -->
@@ -30,21 +31,26 @@
 import { mapGetters } from "vuex";
 
 import formContainer from "./components/FormContainer.vue";
+import c3pChart from "./components/c3pChart.vue";
 
 export default {
     name: "app",
     components: {
-        formContainer
+        formContainer, c3pChart
     },
     created() {
         // this.$store.commit("currentForm", { formId: "suvery1001"});
     },
     computed: {
         ...mapGetters([
-            "detailForm"
+            "detailForm",
+            "report"
         ]),
         myForm() {
             return this.detailForm;
+        },
+        myReport() {
+          return this.report;
         }
     }
 };
