@@ -29,8 +29,7 @@
       ],
       data() {
         return {
-          "chartData": this.report.payload,
-          "p1": null
+          "chartData": this.report.payload
         };
       },
       created() {
@@ -42,28 +41,13 @@
         };
 
         Vue.nextTick(() => {
-
           self.barChart(self.chartData[0], "insight.bar2", "");
           self.donutChart(self.chartData[1], "insight.donut", options);
-
-//          this.p1 = new Promise(
-//              function(resolve, reject) {
-//                self.createChart(self.chartData[0], "", resolve);
-//              }
-//          );
-//          this.p1.then(
-//              function(){
-//                self.createChart(self.chartData[1], options);
-//              }
-//          );
-
         });
       },
       methods: {
         createChart(data, theme, opt) {
           const options = opt ? opt : {};
-          console.log(data.reportType);
-
           c3p.generate("#"+data.reportType+"_chart", theme, {
             data: {
               columns: data.chartData
@@ -73,8 +57,6 @@
         },
         barChart(data, theme, opt) {
           const options = opt ? opt : {};
-          console.log(data.reportType);
-
           c3p.generate("#"+data.reportType+"_chart", theme, {
             data: {
               columns: data.chartData
@@ -84,8 +66,6 @@
         },
         donutChart(data, theme, opt) {
           const options = opt ? opt : {};
-          console.log(data.reportType);
-
           c3p.generate("#"+data.reportType+"_chart", theme, {
             data: {
               columns: data.chartData
