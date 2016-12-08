@@ -20,10 +20,10 @@
             </div>
         </div>  
     </header>
-    <section class="questionnaire" style="top:100px">
+    <section style="top:300px">
         <div v-for="item in reportItems">
             <pieChart v-if="item.componentType === 'single_choice'" :item="item" />
-            <barChart v-if="item.componentType === 'multi_choice'" :item="item" />
+            <router-link v-if="item.componentType === 'long_answer'" :to="'/report/' + id + '/comp/' + item.componentId"><h1>[기타 의견 > ({{ item.choices.length }})]</h1></router-link>
         </div>
     </section>
 </div>
@@ -34,17 +34,26 @@ import { mapGetters } from "vuex";
 import { UPDATE_REPORT } from "../store/mutation-types";
 
 import pieChart from "./Report.pieChart";
-import barChart from "./Report.barChart";
 
 export default {
 
-    components: { pieChart, barChart },
+    props: {
+        id: {
+            type: String,
+            default() {
+                return "";
+            }
+        }
+    },
+    components: { pieChart },
     created() {
         this.fetch();
     },
     methods: {
         fetch() {
-            this.$store.dispatch("getReport");
+            this.$store.dispatch("getReport", {
+                formId: this.$route.params.id
+            });
         },       
         back() {
             this.$store.commit(UPDATE_REPORT);
@@ -52,6 +61,9 @@ export default {
         }
     },
     computed: {
+        id() {
+            return this.$route.params.id;
+        },
         ...mapGetters([
             "reportTitle",
             "reportDescription",
